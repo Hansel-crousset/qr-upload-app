@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Photo Uploader</title>
+  <!-- 🟢 Viewport meta tag to enable proper scaling on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-size: 18px;
@@ -18,16 +21,16 @@
       margin-top: 10px;
     }
 
-    /* 🎯 Triple the size for smaller screens (like iPhones and tablets) */
+    /* Triple size for smaller screens (like iPhones and tablets) */
     @media (max-width: 600px) {
       body {
-        font-size: 54px; /* Triple the base font size */
+        font-size: 54px;
       }
       h1 {
-        font-size: 96px; /* Triple heading size */
+        font-size: 96px;
       }
       input, button {
-        font-size: 54px; /* Triple the inputs and buttons size */
+        font-size: 54px;
       }
     }
   </style>
@@ -67,5 +70,3 @@
   </script>
 </body>
 </html>
-
-
