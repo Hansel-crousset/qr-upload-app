@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code Image Uploader</title>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+  <h1>Scan QR and Upload Photo</h1>
+
+  <!-- Display your static QR code image -->
+  <img src="QR123.png" alt="QR Code for order QR123" width="200" />
+  <p>Scan this QR code (order: QR123)</p>
+
+  <div id="qr-reader" style="width: 300px;"></div>
+  <p>Scanned QR code: <span id="qr-result">None</span></p>
+  
+  <input type="file" id="photoInput" accept="image/*" />
+  <button id="uploadBtn">Upload to Cloudinary</button>
+
+  <script>
+    // Initialize QR scanner
+    const qrReader = new Html5Qrcode("qr-reader");
+    let scannedData = "";
+
+    function onScanSuccess(decodedText, decodedResult) {
+      scannedData = decodedText;
+      document.getElementById("qr-result").innerText = decodedText;
+      qrReader.stop();
+    }
+
+    qrReader.start({ facingMode: "environment" }, {
+      fps: 10,
+      qrbox: 250
+    }, onScanSuccess);
+
+    // Cloudinary config
+    const CLOUD_NAME = "dfme2ykmwame"; // Replace with your Cloudinary cloud name
+    const UPLOAD_PRESET = "unsigned_preset"; // Replace with your unsigned upload preset
+
+    // Handle upload
+    document.getElementById("uploadBtn").addEventListener("click", async () => {
+      const fileInput = document.getElementById("photoInput");
+      const file = fileInput.files[0];
+      if (!file || !scannedData) {
+        alert("Please scan QR code and select a photo first!");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      console.log("Uploaded to Cloudinary:", data);
+
+      // Show alert with secure URL and scanned QR data
+      alert(`Upload successful!\nQR: ${scannedData}\nPhoto URL: ${data.secure_url}`);
+    });
+  </script>
+</body>
+</html>
