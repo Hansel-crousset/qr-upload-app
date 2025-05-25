@@ -5,16 +5,30 @@
   <title>Photo Uploader</title>
   <style>
     body {
-      font-size: 18px; /* Make the default text bigger */
+      font-size: 18px;
       font-family: Arial, sans-serif;
+      margin: 20px;
     }
     h1 {
-      font-size: 32px; /* Bigger heading */
+      font-size: 32px;
       color: #333;
     }
     input, button {
-      font-size: 18px; /* Make input and button text bigger */
+      font-size: 18px;
       margin-top: 10px;
+    }
+
+    /* Responsive styling for smaller screens */
+    @media (max-width: 600px) {
+      body {
+        font-size: 20px; /* Larger base font size for smaller screens */
+      }
+      h1 {
+        font-size: 28px; /* Slightly smaller heading for balance */
+      }
+      input, button {
+        font-size: 20px; /* Larger inputs and buttons for easier tapping */
+      }
     }
   </style>
 </head>
@@ -26,8 +40,8 @@
   <button id="uploadBtn">Upload to Cloudinary</button>
 
   <script>
-    const CLOUD_NAME = "dfme2ykmw"; // Replace with your Cloudinary cloud name
-    const UPLOAD_PRESET = "unsigned_preset"; // Replace with your unsigned upload preset
+    const CLOUD_NAME = "dfme2ykmw";
+    const UPLOAD_PRESET = "unsigned_preset";
 
     document.getElementById("uploadBtn").addEventListener("click", async () => {
       const fileInput = document.getElementById("photoInput");
