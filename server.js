@@ -4,8 +4,8 @@
 // Load QR code generator library
 const QRCode = require('qrcode');
 
-// Content for the QR code - your deployed app URL
-const qrContent = "https://myapp.onrender.com/index.html"; // Replace with your real URL!
+// Content for the QR code - your final Railway live URL
+const qrContent = "https://talented-quietude-production.up.railway.app/index.html";
 
 // Generate QR code image
 QRCode.toFile('QR123.png', qrContent, {
