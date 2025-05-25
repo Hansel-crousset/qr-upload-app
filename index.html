@@ -3,11 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Photo Uploader</title>
+  <style>
+    body {
+      font-size: 18px; /* Make the default text bigger */
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 32px; /* Bigger heading */
+      color: #333;
+    }
+    input, button {
+      font-size: 18px; /* Make input and button text bigger */
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <h1>Upload Your Photo</h1>
   
   <input type="file" id="photoInput" accept="image/*" />
+  <br/>
   <button id="uploadBtn">Upload to Cloudinary</button>
 
   <script>
@@ -32,7 +47,7 @@
       });
 
       const data = await response.json();
-      console.log("Full Cloudinary Response:", data); // 🟡 Added to debug response
+      console.log("Full Cloudinary Response:", data);
       alert(`Upload successful!\nPhoto URL: ${data.secure_url}`);
     });
   </script>
