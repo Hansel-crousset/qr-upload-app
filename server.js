@@ -28,6 +28,11 @@ app.use(express.static(path.join(__dirname)));
 app.use(cors());
 app.use(express.json());
 
+// Route to serve index.html explicitly at /
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
 // Handle image upload from HTML page
 app.post("/upload", upload.single("photo"), (req, res) => {
   const qrCodeData = req.body.qrData;
