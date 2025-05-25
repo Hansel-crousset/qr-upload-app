@@ -1,6 +1,3 @@
-
-
-
 // Load QR code generator library
 const QRCode = require('qrcode');
 
@@ -19,12 +16,15 @@ QRCode.toFile('QR123.png', qrContent, {
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 const upload = multer({ dest: "uploads/" }); // Save images to /uploads
 
-// Serve static files (like index.html and QR123.png)
-app.use(express.static(__dirname));
+// Serve static files (like index.html and QR123.png) from the root directory
+app.use(express.static(path.join(__dirname)));
+
+// CORS and JSON parsing middleware
 app.use(cors());
 app.use(express.json());
 
@@ -40,5 +40,9 @@ app.post("/upload", upload.single("photo"), (req, res) => {
   res.json({ message: "Upload successful!", qrCodeData, photoPath });
 });
 
-// Start the server
-app.listen(3000, () => console.log("Server running at http://localhost:3000"));
+// Start the server on the port provided by Railway (or default to 3000 locally)
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+
+
+
