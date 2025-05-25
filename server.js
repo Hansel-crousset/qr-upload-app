@@ -42,7 +42,5 @@ app.post("/upload", upload.single("photo"), (req, res) => {
 
 // Start the server on the port provided by Railway (or default to 3000 locally)
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
-
-
+app.listen(port, "0.0.0.0", () => console.log(`Server running at http://0.0.0.0:${port}`));
 
